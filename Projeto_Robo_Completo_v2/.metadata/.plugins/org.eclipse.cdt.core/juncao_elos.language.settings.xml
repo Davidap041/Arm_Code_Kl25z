@@ -2,90 +2,6 @@
 <project>
 	<configuration id="com.crt.advproject.config.exe.debug.161971588" name="Debug">
 		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
-			<provider id="com.crt.advproject.GCCBuildCommandParser">
-				<language id="org.eclipse.cdt.core.gcc">
-					<resource project-relative-path="board/pin_mux.c">
-						<entry kind="includePath" name="/${ProjName}/drivers">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/board">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/CMSIS_driver">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/CMSIS">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/utilities">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/Debug">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/source">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/startup">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="macro" name="CPU_MKL25Z128VLK4" value="1"/>
-						<entry kind="macro" name="CPU_MKL25Z128VLK4_cm0plus" value="1"/>
-						<entry kind="macro" name="CR_INTEGER_PRINTF" value="1"/>
-						<entry kind="macro" name="DEBUG" value="1"/>
-						<entry kind="macro" name="FSL_RTOS_BM" value="1"/>
-						<entry kind="macro" name="PRINTF_FLOAT_ENABLE" value="0"/>
-						<entry kind="macro" name="SDK_DEBUGCONSOLE" value="0"/>
-						<entry kind="macro" name="SDK_OS_BAREMETAL" value="1"/>
-						<entry kind="macro" name="__MCUXPRESSO" value="1"/>
-						<entry kind="macro" name="__REDLIB__" value="1"/>
-						<entry kind="macro" name="__USE_CMSIS" value="1"/>
-					</resource>
-					<resource project-relative-path="source/Code_Braco.c">
-						<entry kind="includePath" name="/${ProjName}/drivers">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/board">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/CMSIS_driver">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/CMSIS">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/utilities">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/Debug">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/source">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="includePath" name="/${ProjName}/startup">
-							<flag value="VALUE_WORKSPACE_PATH"/>
-						</entry>
-						<entry kind="macro" name="CPU_MKL25Z128VLK4" value="1"/>
-						<entry kind="macro" name="CPU_MKL25Z128VLK4_cm0plus" value="1"/>
-						<entry kind="macro" name="CR_INTEGER_PRINTF" value="1"/>
-						<entry kind="macro" name="DEBUG" value="1"/>
-						<entry kind="macro" name="FSL_RTOS_BM" value="1"/>
-						<entry kind="macro" name="PRINTF_FLOAT_ENABLE" value="0"/>
-						<entry kind="macro" name="SDK_DEBUGCONSOLE" value="0"/>
-						<entry kind="macro" name="SDK_OS_BAREMETAL" value="1"/>
-						<entry kind="macro" name="__MCUXPRESSO" value="1"/>
-						<entry kind="macro" name="__REDLIB__" value="1"/>
-						<entry kind="macro" name="__USE_CMSIS" value="1"/>
-					</resource>
-				</language>
-			</provider>
 			<provider id="com.crt.advproject.GCCBuildSpecCompilerParser">
 				<language id="org.eclipse.cdt.core.gcc">
 					<entry kind="includePath" name="C:/nxp/MCUXpressoIDE_11.1.0_3209/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.1.0.201909161352/tools/redlib/include">
@@ -3994,6 +3910,9 @@
 					<entry kind="macro" name="__ATOMIC_ACQ_REL" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__ATOMIC_ACQ_REL" value="16">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__ATOMIC_CONSUME" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -4798,6 +4717,9 @@
 					<entry kind="macro" name="__SIZEOF_LONG__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__SIZEOF_LONG__" value="0x1P-16UK">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__SIZEOF_POINTER__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -4864,13 +4786,7 @@
 					<entry kind="macro" name="__TQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__UACCUM_EPSILON__" value="0x1P-16UK">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
 					<entry kind="macro" name="__UACCUM_FBIT__" value="16">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
-					<entry kind="macro" name="__UACCUM_IBIT__" value="16">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__UACCUM_MAX__" value="0XFFFFFFFFP-16UK">
