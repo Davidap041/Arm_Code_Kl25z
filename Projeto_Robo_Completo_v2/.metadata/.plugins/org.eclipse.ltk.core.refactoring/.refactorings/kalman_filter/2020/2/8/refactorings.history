@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;kalman_filter/source/Kalman.cpp&apos; to &apos;Kalman.c&apos;" description="Rename resource &apos;Kalman.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="source/Kalman.cpp" name="Kalman.c" stamp="1582029990639" updateReferences="true"/>
+</session>

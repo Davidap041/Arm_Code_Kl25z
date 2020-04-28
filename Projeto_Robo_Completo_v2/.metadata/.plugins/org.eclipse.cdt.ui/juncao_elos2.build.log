@@ -1,0 +1,6 @@
+15:22:04 **** Incremental Build of configuration Debug for project juncao_elos2 ****
+make -r -j4 all 
+make: Nothing to be done for 'all'.
+
+15:22:05 Build Finished. 0 errors, 0 warnings. (took 224ms)
+

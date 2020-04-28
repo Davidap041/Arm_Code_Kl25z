@@ -1,0 +1,19 @@
+11:31:35 **** Build of configuration Debug for project Ident_elo_2 ****
+make -r -j4 all 
+Building target: Ident_elo_2.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -Xlinker -Map="Ident_elo_2.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m0plus -mthumb -T "Ident_elo_01_Debug.ld" -o "Ident_elo_2.axf"  ./utilities/fsl_debug_console.o  ./startup/startup_mkl25z4.o  ./source/Code_Braco.o ./source/mtb.o ./source/semihost_hardfault.o  ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_dac.o ./drivers/fsl_dma.o ./drivers/fsl_dmamux.o ./drivers/fsl_flash.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_dma.o ./drivers/fsl_lpsci.o ./drivers/fsl_lpsci_dma.o ./drivers/fsl_pit.o ./drivers/fsl_smc.o ./drivers/fsl_tpm.o ./drivers/fsl_uart.o ./drivers/fsl_uart_dma.o  ./board/board.o ./board/clock_config.o ./board/peripherals.o ./board/pin_mux.o  ./CMSIS_driver/fsl_i2c_cmsis.o  ./CMSIS/system_MKL25Z4.o   
+Memory region         Used Size  Region Size  %age Used
+   PROGRAM_FLASH:       27788 B       128 KB     21.20%
+            SRAM:        3052 B        16 KB     18.63%
+Finished building target: Ident_elo_2.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Ident_elo_2.axf"; # arm-none-eabi-objcopy -v -O binary "Ident_elo_2.axf" "Ident_elo_2.bin" ; # checksum -p MKL25Z128xxx4 -d "Ident_elo_2.bin";
+   text	   data	    bss	    dec	    hex	filename
+  27224	    564	   2488	  30276	   7644	Ident_elo_2.axf
+ 
+
+11:31:35 Build Finished. 0 errors, 0 warnings. (took 816ms)
+

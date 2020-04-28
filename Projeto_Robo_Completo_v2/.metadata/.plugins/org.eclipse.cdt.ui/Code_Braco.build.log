@@ -1,0 +1,19 @@
+10:53:19 **** Incremental Build of configuration Debug for project Code_Braco ****
+make -r -j4 all 
+Building target: Code_Braco.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -Xlinker -Map="Code_Braco.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m0plus -mthumb -T Code_Braco_Debug.ld -o "Code_Braco.axf"  ./utilities/fsl_debug_console.o  ./startup/startup_mkl25z4.o  ./source/Code_Braco.o ./source/mtb.o ./source/semihost_hardfault.o  ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_dac.o ./drivers/fsl_dma.o ./drivers/fsl_dmamux.o ./drivers/fsl_flash.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_dma.o ./drivers/fsl_lpsci.o ./drivers/fsl_lpsci_dma.o ./drivers/fsl_pit.o ./drivers/fsl_smc.o ./drivers/fsl_tpm.o ./drivers/fsl_uart.o ./drivers/fsl_uart_dma.o  ./board/board.o ./board/clock_config.o ./board/peripherals.o ./board/pin_mux.o  ./CMSIS_driver/fsl_i2c_cmsis.o  ./CMSIS/system_MKL25Z4.o   
+Memory region         Used Size  Region Size  %age Used
+   PROGRAM_FLASH:       27148 B       128 KB     20.71%
+            SRAM:        2984 B        16 KB     18.21%
+Finished building target: Code_Braco.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Code_Braco.axf"; # arm-none-eabi-objcopy -v -O binary "Code_Braco.axf" "Code_Braco.bin" ; # checksum -p MKL25Z128xxx4 -d "Code_Braco.bin";
+   text	   data	    bss	    dec	    hex	filename
+  26644	    504	   2480	  29628	   73bc	Code_Braco.axf
+ 
+
+10:53:21 Build Finished. 0 errors, 0 warnings. (took 1s.510ms)
+

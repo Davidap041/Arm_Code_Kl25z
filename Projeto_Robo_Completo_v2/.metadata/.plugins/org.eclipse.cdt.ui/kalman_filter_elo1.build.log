@@ -1,0 +1,6 @@
+09:46:45 **** Incremental Build of configuration Debug for project kalman_filter_elo1 ****
+make -r -j4 all 
+make: Nothing to be done for 'all'.
+
+09:46:46 Build Finished. 0 errors, 0 warnings. (took 420ms)
+

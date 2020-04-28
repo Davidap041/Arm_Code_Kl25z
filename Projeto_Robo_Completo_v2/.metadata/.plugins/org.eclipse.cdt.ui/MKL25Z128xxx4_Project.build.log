@@ -1,0 +1,6 @@
+19:40:58 **** Incremental Build of configuration Debug for project MKL25Z128xxx4_Project ****
+make -r -j4 all 
+make: Nothing to be done for 'all'.
+
+19:40:58 Build Finished. 0 errors, 0 warnings. (took 279ms)
+

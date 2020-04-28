@@ -1,0 +1,197 @@
+#include <mpu_6050.h>
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MKL25Z4.h"
+#include "fsl_debug_console.h"
+//#include "fsl_pit.h"
+#include "fsl_gpio.h"
+#include "function.h"
+#include "perifericos.h"
+#include "Kalman.h"
+//#include "arm_math.h"
+
+// Variáveis Globais
+// Definição do endereçamento dos 4 sensores
+acc_data_t acc_1 = { .address = 0x68, .I2C = I2C0_BASE, };
+acc_data_t acc_2 = { .address = 0x69, .I2C = I2C0_BASE, };
+acc_data_t acc_3 = { .address = 0x68, .I2C = I2C1_BASE, };
+acc_data_t acc_4 = { .address = 0x69, .I2C = I2C1_BASE, };
+// Variáveis para o cálculo do Ângulo do Giroscópio
+float angGy = 0;
+float angGy_aux = 0;
+// Variável do ângulo do acelerômetro
+float acc_pitch = 0;
+// Variável do ângulo da fusão sensorial
+
+float posi_x = 0;
+float posi_y = 0;
+float posi_z = 0;
+
+float fused = 0;
+float aleatorio;
+
+int valor_1;
+int valor_2;
+int valor_3;
+int fusao;
+// definição de Variáveis sobre os ângulos
+float alfa = 0.92f;
+float seno = 0.003;
+
+//Variáveis de Testes e DEBUGs
+uint32_t teste_motor1 = 4500;
+uint32_t teste_motor2 = 4000;
+uint32_t teste_motor3 = 4000;
+// Variáveis Relacionadas ao ensaio de prbs
+int k = 0; 		// Duração do Ensaio
+int amostra = 0; 	// Amostra do PRBS
+const int tempo_ident = 100;
+int valor_pwm;
+int tempo;
+// Variáveis relacionadas ao filtro de kalman
+Kalman_data kalmanX;
+Kalman_data kalmanY;
+
+double accX, accY, accZ;
+double gyroX, gyroY, gyroZ;
+int16_t tempRaw;
+
+double gyroXangle, gyroYangle; // Angle calculate using the gyro only
+double compAngleX, compAngleY; // Calculated angle using a complementary filter
+double kalAngleX, kalAngleY; // Calculated angle using a Kalman filter
+
+double pitch;
+double gyroYrate;
+
+float valor_prbs[100] = { -1.0607, 0.9241, -0.5928, 0.0896, -1.0499, 0.3202,
+		-0.7443, 0.4838, 0.5941, 0.7792, -0.1553, -1.3068, -0.8510, 1.2979,
+		-1.0915, 1.0231, 0.1204, 1.5579, -1.3245, -0.1800, -1.2351, 1.4504,
+		-1.5554, 0.8632, 0.9963, 1.1577, -1.3049, -0.3147, -0.7540, 0.9422,
+		-0.2154, 1.2894, -0.9990, -0.7417, -1.1130, -1.1427, 1.1596, 0.2503,
+		0.1566, -1.1148, 1.1085, 0.3833, -0.4680, 0.0416, -0.3083, -1.3315,
+		-0.8167, -1.1828, -0.9925, -0.8165, -0.2598, -1.4141, 1.2645, 1.3966,
+		-0.0287, -0.0337, -0.5096, 1.2562, -0.4106, -1.2208, 0.8800, -0.3462,
+		-0.8111, -0.3017, -1.2671, -1.1556, 1.3880, 1.4323, 0.2362, -1.3823,
+		-0.8328, -0.4611, 1.0085, -1.5216, -1.4349, -1.0394, 0.4682, 0.7276,
+		0.4639, -0.1541, 0.1476, -0.6396, 0.7683, -0.9767, 0.5865, -0.9938,
+		-0.4130, 0.3944, 0.8799, -1.3153, 1.3483, 0.8657, -0.0415, -0.2014,
+		-0.1671, -0.6081, 0.0267, 0.0338, 0.9974, 0.9258 };
+
+float calcular_angulo(acc_data_t *acc_n) {
+	ACC_ReadRaw(acc_n); // atualizar valores do sensor
+
+	accX = acc_1.ax * g * ACC_RESOLUTION;
+	accY = acc_1.ay * g * ACC_RESOLUTION;
+	accZ = acc_1.az * g * ACC_RESOLUTION;
+
+	gyroX = acc_1.gx * 1.3323e-04;
+	gyroY = acc_1.gy * 1.3323e-04;
+	gyroZ = acc_1.gz * 1.3323e-04;
+
+//	double roll = atan(accY / sqrt(accX * accX + accZ * accZ)) * 57.296;
+	pitch = atan2f(-accX, accZ);
+
+//	double gyroXrate = gyroX / 131.0; // Convert to deg/s
+	gyroYrate = gyroY; // Convert to deg/s
+
+	kalAngleY = getAngle(&kalmanY, pitch, gyroYrate, Ts); // Calculate the angle using a Kalman filter
+//	kalAngleX = getAngle(&kalmanX, roll, -gyroXrate, Ts); // Calculate the angle using a Kalman filter
+
+	return kalAngleY;
+}
+
+void inicializar_sensores(acc_data_t *acc_n) {
+	// Instanciar Sensores
+	bool acc_init = ACC_Init(acc_n);
+	while (!acc_init) {
+		printf("\nsensor nao respondeu.. ");
+		inicializar_I2Cs();
+		acc_init = ACC_Init(acc_n);
+	}
+	//printf("\nsensor respondeu :D ");
+}
+
+void rotina_interrupcao_1() {
+	tempo++;
+	if (k >= 0 && k < tempo_ident) {
+		k++;
+	} else {
+		atualizar_motor_3(valor_prbs[amostra]);
+		k = 0;
+		amostra++;
+	}
+//	printf("\n%d,%d,%d",tempo,k,amostra);
+
+	calcular_angulo(&acc_1);
+	valor_1 = 10000 * valor_prbs[amostra];
+	valor_2 = 10000 * kalAngleY;
+//	valor_1 = 10000 * gyroYrate;
+//	valor_2 = 10000 * pitch;
+//	valor_3 = 10000 * kalAngleY;
+
+	printf("\n%d %d %d %d", tempo, valor_1, valor_2,amostra);
+	int valor_da = 1304.45 * kalAngleY + 2048;
+	atualizar_dac(valor_da);
+}
+void PIT_DriverIRQHandler() {
+	if (PIT_GetStatusFlags(PIT, kPIT_Chnl_0)) {
+		PIT_ClearStatusFlags(PIT, kPIT_Chnl_0, kPIT_TimerFlag);
+		rotina_interrupcao_1();
+	}
+}
+void inicializar_Kalman() {
+	// velocidade angular do giroscopio
+	accX = acc_1.ax;
+	accY = acc_2.ay;
+	accZ = acc_3.az;
+
+	double roll = atan(accY / sqrt(accX * accX + accZ * accZ)) * 57.296;
+	double pitch = atan2(-accX, accZ) * 57.296;
+
+	setAngle(&kalmanX, roll); // Set starting angle
+	setAngle(&kalmanY, pitch);
+	gyroXangle = roll;
+	gyroYangle = pitch;
+	compAngleX = roll;
+	compAngleY = pitch;
+
+}
+int main(void) {
+	/* Init board hardware. */
+	BOARD_InitBootPins();
+	BOARD_InitBootClocks();
+	BOARD_InitBootPeripherals();
+	/* Init FSL debug console. */
+	BOARD_InitDebugConsole();
+
+	inicializar_PWMs();
+	TPM0->CONTROLS[0].CnV = 4500;
+	TPM0->CONTROLS[1].CnV = 4800;
+	TPM0->CONTROLS[2].CnV = 4500;
+	delay(10000);
+
+	inicializar_I2Cs();
+	printf("\nComunicacao I2C inicializada ");
+	inicializar_sensores(&acc_1);
+
+	printf("\nComunicacao Sensores inicializada ");
+//	calibrar_sensor(&acc_1);
+	//	call_calibra(&acc_2);
+	//	call_calibra(&acc_3);
+	//	call_calibra(&acc_4);
+	printf("\nsensores calibrados");
+	inicializar_dac(3.14);
+	inicializar_Kalman();
+	configurar_interrupcao_Hz(100);
+
+	//configurar_interrupcao_Hz(100);
+
+	while (1) {
+
+		__asm volatile ("nop");
+	}
+	return 0;
+}

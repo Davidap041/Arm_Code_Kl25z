@@ -1,0 +1,37 @@
+21:37:55 **** Incremental Build of configuration Debug for project teste_robustez_sensor ****
+make -r -j4 all 
+Building file: ../source/Code_Braco.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -DCPU_MKL25Z128VLK4 -DCPU_MKL25Z128VLK4_cm0plus -DSDK_OS_BAREMETAL -DFSL_RTOS_BM -DSDK_DEBUGCONSOLE=0 -DCR_INTEGER_PRINTF -DPRINTF_FLOAT_ENABLE=0 -D__MCUXPRESSO -D__USE_CMSIS -DDEBUG -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\drivers" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\board" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\CMSIS_driver" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\CMSIS" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\utilities" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\board" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\source" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\drivers" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\CMSIS" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\utilities" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\CMSIS_driver" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\startup" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -fmerge-constants -fmacro-prefix-map="../source/"=. -mcpu=cortex-m0plus -mthumb -D__REDLIB__ -fstack-usage -specs=redlib.specs -MMD -MP -MF"source/Code_Braco.d" -MT"source/Code_Braco.o" -MT"source/Code_Braco.d" -o "source/Code_Braco.o" "../source/Code_Braco.c"
+In file included from ../source/Code_Braco.c:1:
+C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\source/mpu_6050.h: In function 'ACC_Init':
+C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\source/mpu_6050.h:136:4: warning: implicit declaration of function 'inicializar_sensores' [-Wimplicit-function-declaration]
+    inicializar_sensores(&acc);
+    ^~~~~~~~~~~~~~~~~~~~
+../source/Code_Braco.c: At top level:
+../source/Code_Braco.c:114:6: warning: conflicting types for 'inicializar_sensores'
+ void inicializar_sensores(acc_data_t *acc_n) {
+      ^~~~~~~~~~~~~~~~~~~~
+In file included from ../source/Code_Braco.c:1:
+C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\source/mpu_6050.h:136:4: note: previous implicit declaration of 'inicializar_sensores' was here
+    inicializar_sensores(&acc);
+    ^~~~~~~~~~~~~~~~~~~~
+Finished building: ../source/Code_Braco.c
+ 
+Building target: teste_robustez_sensor.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -Xlinker -Map="teste_robustez_sensor.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m0plus -mthumb -T Code_Braco_Debug.ld -o "teste_robustez_sensor.axf"  ./utilities/fsl_debug_console.o  ./startup/startup_mkl25z4.o  ./source/Code_Braco.o ./source/mtb.o ./source/semihost_hardfault.o  ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_dac.o ./drivers/fsl_dma.o ./drivers/fsl_dmamux.o ./drivers/fsl_flash.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_dma.o ./drivers/fsl_lpsci.o ./drivers/fsl_lpsci_dma.o ./drivers/fsl_pit.o ./drivers/fsl_smc.o ./drivers/fsl_tpm.o ./drivers/fsl_uart.o ./drivers/fsl_uart_dma.o  ./board/board.o ./board/clock_config.o ./board/peripherals.o ./board/pin_mux.o  ./CMSIS_driver/fsl_i2c_cmsis.o  ./CMSIS/system_MKL25Z4.o   
+Memory region         Used Size  Region Size  %age Used
+   PROGRAM_FLASH:       28140 B       128 KB     21.47%
+            SRAM:        3048 B        16 KB     18.60%
+Finished building target: teste_robustez_sensor.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "teste_robustez_sensor.axf"; # arm-none-eabi-objcopy -v -O binary "teste_robustez_sensor.axf" "teste_robustez_sensor.bin" ; # checksum -p MKL25Z128xxx4 -d "teste_robustez_sensor.bin";
+   text	   data	    bss	    dec	    hex	filename
+  27572	    568	   2480	  30620	   779c	teste_robustez_sensor.axf
+ 
+
+21:37:58 Build Finished. 0 errors, 2 warnings. (took 3s.18ms)
+

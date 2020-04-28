@@ -1,0 +1,6 @@
+15:12:42 **** Incremental Build of configuration Debug for project pd_elos ****
+make -r -j4 all 
+make: Nothing to be done for 'all'.
+
+15:12:42 Build Finished. 0 errors, 0 warnings. (took 206ms)
+

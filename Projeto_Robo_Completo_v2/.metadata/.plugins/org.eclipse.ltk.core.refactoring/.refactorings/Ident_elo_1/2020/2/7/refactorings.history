@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Code_Braco/source/func_aux&apos; to &apos;func_aux.c&apos;" description="Rename resource &apos;func_aux&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="source/func_aux" name="func_aux.c" stamp="1581511878046" updateReferences="true"/>
+</session>

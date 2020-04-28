@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdk-packages>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Identificaco\Identi_Elos\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\juncao_elos2\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\pd_jun_elos\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\juncao_elos3_add_dif\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\teste_robustez_sensor\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\pd_elos\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado\Projeto_Braco_Robotico - v 5\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Identificaco\Identi_Elos\Ident_elo_1\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\kalman_filter_elo2\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\juncao_elos\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1575478468000" path="C:\nxp\MCUXpressoIDE_11.1.0_3209\ide\plugins\com.nxp.mcuxpresso.sdk.sdk_2.x_frdm-kl25z_2.2.0.201911251446\sdks\Thu_Nov_21_12_52_19_2019-windows-mcuxpresso-FRDM-KL25Z_max.zip" schema="manifest-schema/sdk_manifest_v3.3.xsd"/>
+<package hash="1583411708667" path="C:\Users\davia\mcuxpresso\02\SDKPackages\SDK_2.7.0_FRDM-K64F.zip" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Identificaco\Projeto_Braco_Robotico - v 6\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Identificaco\Projeto_Braco_Robotico - v 7\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1583338073794" path="C:\Users\davia\mcuxpresso\02\SDKPackages\SDK_2.2.0_FRDM-KL25Z (1).zip" schema="manifest-schema/sdk_manifest_v3.3.xsd"/>
+<package hash="1583411362244" path="C:\Users\davia\mcuxpresso\02\SDKPackages\SDK_2.7.0_FRDM-KL43Z.zip" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\kalman_filter_elo1(n)\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Identi_Elos\Ident_bias\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_elo_01\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\kalman_filter\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592000" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\GIT_ARM_CODE\KL25z\Projeto_Robo_Completo_v2\juncao_elos3_add_dif\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado\Projeto_Braco_Robotico - v - motor\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado\Projeto_Braco_Robotico - v 4\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592000" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\GIT_ARM_CODE\KL25z\Projeto_Robo_Completo_v2\kalman_filter_elo1(n)\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592000" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\GIT_ARM_CODE\KL25z\Projeto_Robo_Completo_v2\kalman_filter_elo3\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Identi_Elos\Ident_elo_1\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado\Projeto_Braco_Robotico - v3\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Projeto_Braco_Robotico - v 5\Code_Braco\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592000" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\GIT_ARM_CODE\KL25z\Projeto_Robo_Completo_v2\kalman_filter_elo4\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Identi_Elos\Ident_elo_2\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\kalman_filter_elo3\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Identi_Elos\Ident_elo_3\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\jun_elo_pd2\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Identi_Elos\Ident_elo_4\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\kalman_filter_elo4\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\kalman_filter_elo3\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\kalman_filter_elo4\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\kalman_filter_elo1(n)\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\kalman_filter_elo1\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1578334498000" path="C:\nxp\MCUXpressoIDE_11.1.0_3209\ide\plugins\com.nxp.mcuxpresso.sdk.sdk_2.x_frdm-kl43z_2.7.0.201911251446\sdks\d2875d1a57f5de891756755673a11487.zip" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v2\jun_elo_pd\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592000" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\GIT_ARM_CODE\KL25z\Projeto_Robo_Completo_v2\kalman_filter_elo2\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_elo_2\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+<package hash="1580904592956" path="C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\kalman_filter_elo2\part-support" schema="manifest-schema/sdk_manifest_v3.6.xsd"/>
+</sdk-packages>

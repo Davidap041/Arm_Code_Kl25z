@@ -1,0 +1,24 @@
+12:30:43 **** Incremental Build of configuration Debug for project Ident_bias ****
+make -r -j4 all 
+Building file: ../source/Code_Braco.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -DCPU_MKL25Z128VLK4 -DCPU_MKL25Z128VLK4_cm0plus -DSDK_OS_BAREMETAL -DFSL_RTOS_BM -DSDK_DEBUGCONSOLE=0 -DCR_INTEGER_PRINTF -DPRINTF_FLOAT_ENABLE=0 -D__MCUXPRESSO -D__USE_CMSIS -DDEBUG -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\drivers" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\board" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\CMSIS_driver" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\CMSIS" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\utilities" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\board" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\source" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\drivers" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\CMSIS" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\utilities" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\CMSIS_driver" -I"C:\Users\davia\OneDrive\Documentos\Mestrado_Softwares\Braco_Codigos\Projeto_Robo_Completo_v1\Ident_bias\startup" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -fmerge-constants -fmacro-prefix-map="../source/"=. -mcpu=cortex-m0plus -mthumb -D__REDLIB__ -fstack-usage -specs=redlib.specs -MMD -MP -MF"source/Code_Braco.d" -MT"source/Code_Braco.o" -MT"source/Code_Braco.d" -o "source/Code_Braco.o" "../source/Code_Braco.c"
+Finished building: ../source/Code_Braco.c
+ 
+Building target: Ident_bias.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -Xlinker -Map="Ident_bias.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m0plus -mthumb -T Code_Braco_Debug.ld -o "Ident_bias.axf"  ./utilities/fsl_debug_console.o  ./startup/startup_mkl25z4.o  ./source/Code_Braco.o ./source/mtb.o ./source/semihost_hardfault.o  ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_cmp.o ./drivers/fsl_common.o ./drivers/fsl_dac.o ./drivers/fsl_dma.o ./drivers/fsl_dmamux.o ./drivers/fsl_flash.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_i2c_dma.o ./drivers/fsl_lpsci.o ./drivers/fsl_lpsci_dma.o ./drivers/fsl_pit.o ./drivers/fsl_smc.o ./drivers/fsl_tpm.o ./drivers/fsl_uart.o ./drivers/fsl_uart_dma.o  ./board/board.o ./board/clock_config.o ./board/peripherals.o ./board/pin_mux.o  ./CMSIS_driver/fsl_i2c_cmsis.o  ./CMSIS/system_MKL25Z4.o   
+Memory region         Used Size  Region Size  %age Used
+   PROGRAM_FLASH:       27744 B       128 KB     21.17%
+            SRAM:        3048 B        16 KB     18.60%
+Finished building target: Ident_bias.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Ident_bias.axf"; # arm-none-eabi-objcopy -v -O binary "Ident_bias.axf" "Ident_bias.bin" ; # checksum -p MKL25Z128xxx4 -d "Ident_bias.bin";
+   text	   data	    bss	    dec	    hex	filename
+  27176	    568	   2480	  30224	   7610	Ident_bias.axf
+ 
+
+12:30:45 Build Finished. 0 errors, 0 warnings. (took 1s.279ms)
+

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Ident_elo_2/Code_Braco Debug_2.launch&apos; to &apos;Ident_elo_2.launch&apos;" description="Rename resource &apos;Code_Braco Debug_2.launch&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Code_Braco Debug_2.launch" name="Ident_elo_2.launch" stamp="1581690104311" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Ident_elo_2/Code_Braco.mex&apos; to &apos;indet_elo_2.mex&apos;" description="Rename resource &apos;Code_Braco.mex&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Code_Braco.mex" name="indet_elo_2.mex" stamp="1581690116760" updateReferences="true"/>
+</session>

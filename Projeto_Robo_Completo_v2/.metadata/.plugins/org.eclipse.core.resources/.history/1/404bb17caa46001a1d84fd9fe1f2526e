@@ -1,0 +1,151 @@
+#ifndef MPU_6050_H_
+#define MPU_6050_H_
+
+#include "fsl_i2c.h"
+#define ACC_REG_WHOAMI 0x75
+#define g 9.8
+#define ACC_RESOLUTION (1.0f/16384.0f)
+
+int cont=0;
+// Conversão de ângulo y para cima, x para a direita e z saindo da tela
+// Giro pela regra da mão direita
+typedef struct {
+	uint8_t address;
+	I2C_Type *I2C;
+
+	int16_t ax;
+	int16_t ay;
+	int16_t az;
+	int16_t temp;
+	int16_t gx;
+	int16_t gy;
+	int16_t gz;
+
+//	int16_t OffsetX;
+//	int16_t OffsetY;
+//	int16_t OffsetZ;
+
+
+	 int32_t AcelCUMx;
+	 int32_t AcelCUMy;
+	 int32_t AcelCUMz;
+
+	 int32_t GyroCUMx;
+	 int32_t GyroCUMy;
+	 int32_t GyroCUMz;
+
+	 int32_t posi_inicial_x;
+	 int32_t posi_inicial_y;
+	 int32_t posi_inicial_z;
+	 int32_t Acum_posi_inicial_x;
+	 int32_t Acum_posi_inicial_y;
+	 int32_t Acum_posi_inicial_z;
+
+ // Média dos Valores durante a calibração do Acelerômetro
+	int16_t M_ax;
+	int16_t M_ay;
+	int16_t M_az;
+
+// Média dos Valores durante a calibração do Giroscópio
+	int16_t M_gx;
+	int16_t M_gy;
+	int16_t M_gz;
+
+}acc_data_t ;
+
+static inline void ACC_Read(acc_data_t *acc, uint8_t reg,uint8_t* data,uint8_t size){
+// Selecionar a localização do escravo e do port de acordo com o numero do sensor
+		i2c_master_transfer_t xfer = {
+					.data = data,
+					.dataSize = size,
+					.direction = kI2C_Read,
+					.slaveAddress = acc->address,
+					.subaddress = reg,
+					.subaddressSize = 1
+		};
+			//I2C_MasterTransferBlocking(I2C0, &xfer);
+			I2C_MasterTransferBlocking(*acc->I2C, &xfer);
+
+}
+
+static inline void ACC_Write(acc_data_t *acc,uint8_t reg,uint8_t* data,uint8_t size){
+		i2c_master_transfer_t xfer = {
+					.data = data,
+					.dataSize = size,
+					.direction = kI2C_Write,
+					.slaveAddress = acc->address,
+					.subaddress = reg,
+					.subaddressSize = 1
+			};
+		I2C_MasterTransferBlocking(acc->I2C, &xfer);
+}
+
+static inline void ACC_ReadRaw(acc_data_t *acc){
+	uint8_t leitura[14] = {0};
+	uint8_t ready = 0;
+	while((ready && 1) != 1)
+	 ACC_Read(acc,0x3A, &ready, 1);
+
+	ACC_Read(acc, 0x3B, leitura, 14);
+	acc->ax = (leitura[0] << 8) | (leitura[1] );
+	acc->ay = (leitura[2] << 8) | (leitura[3] );
+	acc->az = (leitura[4] << 8) | (leitura[5] );
+	acc->temp = (leitura[6] << 8) | (leitura[7] );
+	acc->gx = (leitura[8] << 8) | (leitura[9] );
+	acc->gy = (leitura[10] << 8) | (leitura[11] );
+	acc->gz = (leitura[12] << 8) | (leitura[13] );
+	 /*
+	if(cont<100){
+	data->OffsetX = ( data->OffsetX + (data->x));
+	data->OffsetY = ( data->OffsetY + (data->y));
+	data->OffsetZ = ( data->OffsetZ + (data->z));
+	cont++;
+	}
+	else{
+		data->OffsetX= (data->OffsetX)/cont;
+		data->OffsetY= (data->OffsetY)/cont;
+		data->OffsetZ= (data->OffsetZ)/cont;
+	}
+*/
+}
+
+static inline bool ACC_Init(acc_data_t *acc){
+	uint8_t data;
+	ACC_Read(acc, ACC_REG_WHOAMI, &data, 1u);
+	if (data != acc->address)
+		return false;
+
+	//Acelerometro mede a resolução +-2g
+	data = 0b00000000;
+	ACC_Write(acc, 0x1C, &data, 1);
+
+	//pequeno filtro digital
+	data = 0b00000001;
+	ACC_Write(acc, 0x1A, &data, 1);
+
+	//liga interrupção dado pronto
+	data = 0b00000001;
+	ACC_Write(acc, 0x38, &data, 1);
+
+	//DESLIGA GYRO
+	//data = 0b00000111;
+	data = 0b00000000;
+	ACC_Write(acc, 0x6C, &data, 1);
+
+	//configura Gyro em  ± 250 °/s
+	data = 0b00000000;
+	ACC_Write(acc, 0x1B, &data, 1);
+
+	//Divisor de clock - amostragem
+	//OR = 1Khz / (1+data)
+	data = 24;
+	ACC_Write(acc, 0x19, &data, 1);
+	//
+
+	//ACORDA
+	data = 0b00000000;
+	ACC_Write(acc, 0x6B, &data, 1);
+
+	return true;
+}
+#endif /* MPU_6050_H_ */

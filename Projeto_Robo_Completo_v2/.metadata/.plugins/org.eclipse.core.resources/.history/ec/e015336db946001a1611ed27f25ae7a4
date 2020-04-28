@@ -1,0 +1,177 @@
+#include <mpu_6050.h>
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MKL25Z4.h"
+#include "fsl_debug_console.h"
+#include "fsl_i2c.h"
+#include "fsl_tpm.h"
+//#include "fsl_pit.h"
+#include "fsl_gpio.h"
+/* TODO: insert other include files here. */
+#include "function.h"
+
+/* TODO: insert other definitions and declarations here. */
+#define Ts (1.0f/40.0f)
+
+// Variáveis Globais
+// Variáveis para o cálculo do Ângulo do Giroscópio
+float angGy = 0;
+float angGy_aux = 0;
+
+//acc_data_t acc_1 = { .address = 0x68, .I2C = I2C0_BASE, };
+//acc_data_t acc_2 = { .address = 0x69, .I2C = I2C0_BASE, };
+//acc_data_t acc_3 = { .address = 0x68, .I2C = I2C1_BASE, };
+//acc_data_t acc_4 = { .address = 0x69, .I2C = I2C1_BASE, };
+
+void call_calibra(acc_data_t *acc) {
+	int i = 1;
+	//int Tcal = 100;
+	int Tcal = 1; // para debugar
+//Faz a leitura de todos os dados de giroscópio e acelerômetro
+	ACC_ReadRaw(acc);
+//Calcula as acelerações em relação ao eixo escolhido
+//	float aceleracao_x = (acc.ax)*g*ACC_RESOLUTION;
+	float aceleracao_y = (acc->ay) * g * ACC_RESOLUTION;
+//	float aceleracao_z = (acc.az)*g*ACC_RESOLUTION;
+
+//Calcula velocidade em relação ao eixo escolhido
+//		float velocidade_x  = 0;
+//		float velocidade_aux_x = 0;
+	float velocidade_y = 0;
+	float velocidade_aux_y = 0;
+//		float velocidade_z  = 0;
+//		float velocidade_aux_z = 0;
+
+	velocidade_y = velocidade_aux_y + Ts * aceleracao_y;
+	velocidade_aux_y = velocidade_y;
+
+//	calcula as posições em relação ao eixo escolhido
+//	float posi_x = 0;
+//	float posi_aux_x = 0;
+	float posi_y = 0;
+	float posi_aux_y = 0;
+//	float posi_z = 0;
+//	float posi_aux_z = 0;
+
+	posi_y = posi_aux_y + Ts * velocidade_y;
+	posi_aux_y = posi_y;
+
+	while (i < Tcal + 1) {
+//inicia rotina de calibração
+		ACC_ReadRaw(acc);
+
+		if (i < Tcal) {
+//acumula as variáveis do acelerômetro
+			//LSB Sensitivy = 16384 LSB/g
+			acc->AcelCUMx = acc->AcelCUMx + acc->ax;
+			acc->AcelCUMy = acc->AcelCUMy + acc->ay;
+			acc->AcelCUMz = acc->AcelCUMz + (acc->az - 16384);
+//acumula as variáveis do giroscópio
+			acc->GyroCUMx = acc->GyroCUMx + acc->gx;
+//		acc_1.GyroCUMy = acc_1.GyroCUMy + acc_1.gy;
+//		acc_1.GyroCUMz = acc_1.GyroCUMz + acc_1.gz;
+
+			acc->Acum_posi_inicial_y = posi_y + acc->Acum_posi_inicial_y;
+			i++;
+		} else {
+			//calcula a media
+			acc->M_ax = acc->AcelCUMx / i;
+			acc->M_ay = acc->AcelCUMy / i;
+			acc->M_az = acc->AcelCUMz / i;
+
+			acc->M_gx = acc->GyroCUMx / i;
+//		acc.Myy= acc.GyroCUMGyy/i;
+//		acc.Myz= acc.GyroCUMGyz/i;
+
+//		acc_1.posi_inicial_x = acc_1.Acum_posi_inicial_x/i;
+			acc->posi_inicial_y = acc->Acum_posi_inicial_y / i;
+//		acc_1.posi_inicial_z = acc_1.Acum_posi_inicial_z/i;
+			i++;
+		}
+	}
+}
+
+float calcular_angulo(const acc_data_t *acc_n) {
+	ACC_ReadRaw(acc_n); // atualizar valores do sensor 1
+// Parâmetros da função sensorial
+	float alfa = 0.98f;
+// velocidade angular do giroscopio
+	float v_ang_yx = (acc_n->gx - acc_n->M_gx) * 1.3323e-04;
+	// calcula o ângulo com a integral da velocidade ângular
+	float angGy = angGy_aux + Ts * v_ang_yx;
+	float angGy_aux;
+	// solicita angulo do acelerometro
+	float acc_pitch = GetAccPitch(acc_n);
+// calcula angulo da fusão do giroscopio com acelerometro
+	float fused = alfa * (fused + v_ang_yx * Ts) + (1 - alfa) * acc_pitch;
+	return fused;
+}
+
+int main(void) {
+	/* Init board hardware. */
+	BOARD_InitBootPins();
+	BOARD_InitBootClocks();
+	BOARD_InitBootPeripherals();
+	/* Init FSL debug console. */
+	BOARD_InitDebugConsole();
+// COnfiguração e inicialização dos PWMs
+	tpm_config_t MeuPWM = { .enableDebugMode = false, .enableDoze = false,
+			.enableReloadOnTrigger = false, .enableStartOnTrigger = false,
+			.enableStopOnOverflow = false, .prescale = kTPM_Prescale_Divide_8,
+			.useGlobalTimeBase = false, };
+
+	//Inicializa TPM (Timer / PWM Module)
+	TPM_Init(TPM0, &MeuPWM);
+	//Configuração dos dois canais para o TPM2 (Vetor)
+	tpm_chnl_pwm_signal_param_t MeuCanalPWM1[4] = { { .chnlNumber = 0,
+			.dutyCyclePercent = 0, .level = kTPM_HighTrue }, { .chnlNumber = 1,
+			.dutyCyclePercent = 0, .level = kTPM_HighTrue }, { .chnlNumber = 2,
+			.dutyCyclePercent = 0, .level = kTPM_HighTrue }, { .chnlNumber = 3,
+			.dutyCyclePercent = 0, .level = kTPM_HighTrue } };
+
+	//Incializadao do PWM. Modulo TPM1, 2 Canais. Verificar que argumento 2 pode ser um vetor de estutura de canais (declarado acima)
+	TPM_SetupPwm(TPM0, MeuCanalPWM1, 4, kTPM_EdgeAlignedPwm, 50,
+			CLOCK_GetPllFllSelClkFreq());
+	//Incializadao do PWM. Modulo TPM0, 1 Canal.
+
+	TPM_StartTimer(TPM0, kTPM_SystemClock);
+
+// Configuração Inicial de i2c0
+	i2c_master_config_t I2C0_Config = { .baudRate_Bps = 400000, .enableMaster =
+	true, .enableStopHold = false, };
+	I2C_MasterInit(I2C0, &I2C0_Config, CLOCK_GetBusClkFreq());
+// Configuração Inicial de i2c1
+	i2c_master_config_t I2C1_Config = { .baudRate_Bps = 400000, .enableMaster =
+	true, .enableStopHold = false, };
+	I2C_MasterInit(I2C1, &I2C1_Config, CLOCK_GetBusClkFreq());
+// Instanciar Sensores
+	acc_data_t acc_1 = { .address = 0x68, .I2C = I2C0, };
+	acc_data_t acc_2 = { .address = 0x69, .I2C = I2C0, };
+	acc_data_t acc_3 = { .address = 0x68, .I2C = I2C1, };
+	acc_data_t acc_4 = { .address = 0x69, .I2C = I2C1, };
+	bool acc_init = ACC_Init(&acc_1);
+	if(acc_init)
+		printf("Sensor Respondeu :D ");
+	else
+		printf("sensor nao respondeu :( ");
+	PRINTF("Hello World\n");
+
+	call_calibra(&acc_1);
+	/* Force the counter to be placed into memory. */
+	volatile static int i = 8;
+	/* Enter an infinite loop, just incrementing a counter. */
+	TPM_UpdatePwmDutycycle(TPM0, 0, kTPM_EdgeAlignedPwm, 4); // motor 2 ini 4
+	TPM_UpdatePwmDutycycle(TPM0, 1, kTPM_EdgeAlignedPwm, 3); // motor 3 ini 3
+	TPM_UpdatePwmDutycycle(TPM0, 2, kTPM_EdgeAlignedPwm, 8); // motor 5 ini 8
+	TPM_UpdatePwmDutycycle(TPM0, 3, kTPM_EdgeAlignedPwm, 8);
+
+	while (1) {
+		/* 'Dummy' NOP to allow source level single stepping of
+		 tight while() loop */
+		__asm volatile ("nop");
+	}
+	return 0;
+}

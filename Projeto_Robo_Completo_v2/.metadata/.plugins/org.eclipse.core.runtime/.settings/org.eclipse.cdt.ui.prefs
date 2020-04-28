@@ -1,0 +1,10 @@
+buildConsoleBackgroundColor=128,128,0
+buildConsoleProblemInfoBackgroundColor=0,128,0
+buildConsoleProblemWarningBackgroundColor=128,128,255
+eclipse.preferences.version=1
+formattingConfirmScopeForEmptySelection=false
+org.eclipse.cdt.ui.text.templates.custom=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+sourceHoverBackgroundColor=47,47,47
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

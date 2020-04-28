@@ -1,0 +1,9 @@
+Kalman.c:32:7:getAngle	56	static
+Kalman.c:79:6:setAngle	0	static
+Kalman.c:83:7:getRate	0	static
+Kalman.c:90:6:setQangle	0	static
+Kalman.c:94:6:setQbias	0	static
+Kalman.c:98:6:setRmeasure	0	static
+Kalman.c:103:7:getQangle	0	static
+Kalman.c:107:7:getQbias	0	static
+Kalman.c:111:7:getRmeasure	0	static
